@@ -9,9 +9,6 @@ var mipmaps = false
 var lzw_module = preload("./gif-lzw/lzw.gd")
 var lzw = lzw_module.new()
 
-#Buggy : HyperDrift, Captain
-#file.open('res://frames/HyperDrift.gif', File.READ)
-#file.open('res://frames/Captain.gif', File.READ)
 func read(source_file):
 	var file = File.new()
 	if file.open(source_file, File.READ) != OK:
@@ -129,15 +126,6 @@ func get_subblock(data, pos):
 		return null
 	else:
 		return data.subarray(pos + 1, pos + data[pos])
-
-func get_block(data, pos):
-	var ofs = 0
-	var block = PoolByteArray()
-	while data[pos + ofs] != 0:
-		block.append_array(data.subarray(pos + ofs + 1, pos + ofs + 1 + data[pos + ofs]))
-		ofs = ofs + data[pos + ofs] + 1
-#	return block
-	return data.subarray(pos, pos + ofs)
 
 func get_lut(data, pos, size):
 	var colors = Array()
